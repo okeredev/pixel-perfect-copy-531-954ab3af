@@ -44,8 +44,8 @@ function SignupPage() {
       navigate({ to: "/login" });
       return;
     }
-    toast.success("Welcome aboard!");
-    navigate({ to: "/dashboard" });
+    toast.success("Welcome aboard! Please complete your profile to start submitting.");
+    navigate({ to: "/profile" });
   };
 
   return (

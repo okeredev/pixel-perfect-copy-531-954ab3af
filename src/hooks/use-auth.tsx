@@ -7,35 +7,48 @@ type AppRole = "admin" | "editor" | "reviewer" | "author";
 type AuthState = {
   session: Session | null;
   user: User | null;
+  profile: any | null;
   loading: boolean;
   roles: AppRole[];
   isStaff: boolean;
+  isProfileComplete: boolean;
   signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [roles, setRoles] = useState<AppRole[]>([]);
 
+  async function fetchProfile(uid: string) {
+    const { data } = await supabase.from("profiles").select("*").eq("id", uid).single();
+    if (data) setProfile(data);
+  }
+
   useEffect(() => {
-    // Subscribe FIRST, then read existing session.
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s);
-      if (!s) setRoles([]);
+      if (!s) {
+        setRoles([]);
+        setProfile(null);
+      } else {
+        fetchProfile(s.user.id);
+      }
     });
 
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
+      if (data.session) fetchProfile(data.session.user.id);
       setLoading(false);
     });
 
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  // Load roles whenever the user changes — defer to avoid blocking the auth callback.
   useEffect(() => {
     const uid = session?.user?.id;
     if (!uid) return;
@@ -49,7 +62,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (cancelled) return;
       if (error) {
         console.error("[useAuth] Failed to load roles:", error.message);
-        // Retry once after a short delay (RLS policies may take a moment after login)
         setTimeout(async () => {
           const retry = await supabase.from("user_roles").select("role").eq("user_id", uid!);
           if (!cancelled && retry.data) {
@@ -61,19 +73,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setRoles((data ?? []).map((r) => r.role as AppRole));
     }
 
-    // Small delay to let auth session propagate
     setTimeout(fetchRoles, 100);
     return () => { cancelled = true; };
   }, [session?.user?.id]);
 
+  const isProfileComplete = !!(
+    profile?.full_name &&
+    profile?.affiliation &&
+    profile?.country &&
+    profile?.phone
+  );
+
   const value: AuthState = {
     session,
     user: session?.user ?? null,
+    profile,
     loading,
     roles,
     isStaff: roles.includes("admin") || roles.includes("editor"),
+    isProfileComplete,
     signOut: async () => {
       await supabase.auth.signOut();
+    },
+    refreshProfile: async () => {
+      if (session?.user?.id) await fetchProfile(session.user.id);
     },
   };
 

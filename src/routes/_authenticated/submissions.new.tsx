@@ -19,11 +19,32 @@ export const Route = createFileRoute("/_authenticated/submissions/new")({
 });
 
 function NewSubmissionPage() {
-  const { user } = useAuth();
+  const { user, isProfileComplete } = useAuth();
   const navigate = useNavigate();
   const [type, setType] = useState<"journal" | "conference">("journal");
   const [stage, setStage] = useState<"abstract" | "full_paper">("abstract");
   const [submitting, setSubmitting] = useState(false);
+
+  if (!isProfileComplete) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <div className="mb-6 rounded-full bg-primary/5 p-6 text-primary">
+          <Users size={48} />
+        </div>
+        <h2 className="font-display text-2xl font-bold text-primary">Complete your profile first</h2>
+        <p className="mt-2 max-w-sm text-muted-foreground">
+          To maintain academic integrity, you must provide your affiliation and contact details 
+          before starting a new submission.
+        </p>
+        <button
+          onClick={() => navigate({ to: "/profile" })}
+          className="mt-8 rounded-full bg-primary px-8 py-3 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+        >
+          Go to Profile
+        </button>
+      </div>
+    );
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

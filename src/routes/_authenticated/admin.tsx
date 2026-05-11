@@ -97,16 +97,30 @@ function AdminPage() {
                       <p className="text-sm font-medium text-muted-foreground">{detailItem.data.email}</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-6 p-6 rounded-3xl bg-muted/30 border border-border/40">
+                  <div className="grid grid-cols-2 gap-4 p-6 rounded-3xl bg-muted/30 border border-border/40">
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-1">Affiliation</p>
                       <p className="text-sm font-bold text-foreground">{detailItem.data.affiliation || "None provided"}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-1">Joined</p>
-                      <p className="text-sm font-bold text-foreground">{new Date(detailItem.data.created_at).toLocaleDateString()}</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-1">Country</p>
+                      <p className="text-sm font-bold text-foreground">{detailItem.data.country || "None provided"}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-1">Phone</p>
+                      <p className="text-sm font-bold text-foreground">{detailItem.data.phone || "None provided"}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-1">ORCiD</p>
+                      <p className="text-sm font-bold text-foreground">{detailItem.data.orcid || "None provided"}</p>
                     </div>
                   </div>
+                  {detailItem.data.bio && (
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-2">Biography</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{detailItem.data.bio}</p>
+                    </div>
+                  )}
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-primary/40 mb-3">Roles & Permissions</p>
                     <div className="flex flex-wrap gap-2">

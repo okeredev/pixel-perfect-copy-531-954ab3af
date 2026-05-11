@@ -58,14 +58,16 @@ function GuidelinesPage() {
       <Section eyebrow="02 · Manuscript Structure" title="Standard sections." muted>
         <div className="grid gap-6 md:grid-cols-2 reveal-anim">
           {[
-            ["Title & Abstract", "A concise title and a structured abstract of 200–300 words including purpose, method, findings and implications."],
-            ["Introduction", "Establish the problem, objectives and significance of the study."],
-            ["Literature Review", "A focused review of relevant scholarship that situates your contribution."],
-            ["Methodology", "Detail the research design, participants, data collection and analysis."],
-            ["Results / Findings", "Present findings clearly, using tables and figures where helpful."],
-            ["Discussion", "Interpret your results, link to prior research, and acknowledge limitations."],
-            ["Conclusion", "Summarise contributions and outline implications for theory, policy or practice."],
-            ["References", "Use APA 7 style throughout for all citations and the reference list."],
+            ["Title Page", "Includes full title, author names, institutional affiliations, ORCiD Number, and corresponding author contact information."],
+            ["Abstract", "Summarise the study in no more than 250 words: purpose, methodology, main findings, and conclusion."],
+            ["Keywords", "Include 3–6 keywords that represent the main topics of the study."],
+            ["Introduction", "Introduce the research problem and explain its significance; state the study’s objectives clearly."],
+            ["Literature", "Clearly review relevant literature related to the study."],
+            ["Methodology", "Detailed information on research design, participants, data collection, and analysis methods."],
+            ["Results / Findings", "Present the findings clearly, using tables and figures where necessary without repetition."],
+            ["Discussion", "Interpret results, explaining significance and relationship to previous research; highlight limitations."],
+            ["Conclusion", "Summarise key findings, implications, and suggest recommendations or future research directions."],
+            ["References", "Must follow a consistent academic style, preferably APA 7th edition or Harvard style."],
           ].map(([t, d]) => (
             <div key={t} className="glass-card p-10 rounded-[2.5rem] transition-all duration-500 hover:border-primary">
               <h3 className="font-display text-2xl font-black text-primary tracking-tight">{t}</h3>
@@ -81,8 +83,8 @@ function GuidelinesPage() {
           <Spec label="Font" value="Times New Roman, 12 pt" />
           <Spec label="Line spacing" value="1.5 Spacing" />
           <Spec label="Margins" value="1 inch (2.54 cm)" />
-          <Spec label="Length" value="6,000–8,000 words" />
-          <Spec label="Tables" value="Embedded in text" />
+          <Spec label="Research Articles" value="Up to 9,000 words" />
+          <Spec label="Other Submissions" value="Up to 4,500 words" />
         </div>
       </Section>
 

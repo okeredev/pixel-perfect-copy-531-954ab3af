@@ -33,8 +33,8 @@ function HomePage() {
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-foreground/70 md:text-xl font-medium">
               The COOU Graduate Journal of Interdisciplinary Research and
               Development is a peer-reviewed home for sound, well-grounded
-              research from postgraduate scholars across Nigeria, Africa and
-              the wider world.
+              research from postgraduate scholars, academics, and researchers 
+              across Nigeria, Africa and the wider world.
             </p>
             <div className="mt-12 flex flex-wrap gap-4">
               <Link

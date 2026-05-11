@@ -33,7 +33,7 @@ export function SiteHeader() {
           <div className="leading-tight">
             <div className="font-display text-lg font-black tracking-tight text-primary">COOU <span className="text-foreground">Graduate Journal</span></div>
             <div className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">
-              Interdisciplinary Research Hub
+              Interdisciplinary Research and Development
             </div>
           </div>
         </Link>

@@ -5,10 +5,10 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-border/60 bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="font-display text-xl">COOU Graduate Journal</div>
+          <div className="font-display text-xl">COOU Graduate Journal of Interdisciplinary Research and Development</div>
           <p className="mt-3 max-w-md text-sm text-primary-foreground/75">
             A peer-reviewed interdisciplinary journal of the School of Postgraduate
-            Studies, Chukwuemeka Odumegwu Ojukwu University, Anambra State, Nigeria.
+            Studies, Chukwuemeka Odumegwu Ojukwu University (COOU), Anambra State, Nigeria.
           </p>
           <div className="mt-4 h-px w-12 bg-gold" />
           <p className="mt-4 text-xs uppercase tracking-[0.2em] text-primary-foreground/60">

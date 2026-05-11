@@ -19,10 +19,27 @@ const committee = [
   ["Co-Chair (Igbariam)", "Dr. Agary Nwokoye"],
   ["Co-Chair (Awka)", "Dr. Amaechi Nwachukwu"],
   ["Co-Chair (Uli)", "Dr. Emmanuel Onyebueke"],
-  ["Co-Chair (Registration & Publications)", "Dr. Chukwunonso Ekesiobi"],
-  ["Co-Chair (Media & Publicity)", "Dr. Harrison Madubueze"],
+  ["Co-Chair (Registration and Publications)", "Dr. Chukwunonso Ekesiobi"],
+  ["Co-Chair (Media and Publicity)", "Dr. Harrison Madubueze"],
   ["Secretary", "Dr. Eboh Obinna"],
   ["Online Coordinator", "Prof. John Paul Iloh"],
+];
+
+const facultyRepresentatives = [
+  ["Faculty of Basic Medical Sciences", "Dr. Agnes A. Nwakanma"],
+  ["Faculty of Environmental Sciences", "Dr. Innocent C. Ezemedo"],
+  ["Faculty of Engineering", "Dr. Chidi Moughalu"],
+  ["Faculty of Natural Sciences", "Dr. Bright Uba"],
+  ["Faculty of Physical Sciences", "Prof. C. C. Onwuchukwu"],
+  ["Faculty of Agriculture", "Prof. A. M. Ugboaja"],
+  ["Faculty of Arts", "Dr. Ikechukwu Asika"],
+  ["Faculty of Clinical Medicine", "Dr. B. C. Ochiogu"],
+  ["Faculty of Education", "Dr. Stella Ezeaku"],
+  ["Faculty of Health Sciences", "Dr. Chika Obi-Ezeani"],
+  ["Faculty of Management Sciences", "Dr. Nkechi Ofor"],
+  ["Faculty of Pharmaceutical Sciences", "Dr. Ruth Afunwa"],
+  ["Faculty of Social Sciences", "Dr. Yves-Mary Obi"],
+  ["Faculty of Law", "Dr. Chinwe Iloka"],
 ];
 
 const members = [
@@ -32,7 +49,19 @@ const members = [
   "Dr. Ikenna Ibe", "Dr. Chidimma Odira", "Dr. Goodfaith Dike", "Dr. Gideon Nwafor",
   "Dr. Chinwe Obananya", "Dr. Chioma Okeke", "Dr. Godfrey Afamnede", "Dr. Blessing Chugo Idigo",
   "Dr. Cosmas Nwankwo", "Dr. Nonye Ezeaka", "Dr. Ndubuisi Emegha", "Dr. Chijioke Okoye",
-  "Dr. Josephine Ngozi Morah", "Dr. Nwokolo Echezona", "Dr. Obiageli Akamobi",
+  "Dr. Josephine Ngozi Morah", "Dr. Nwokolo Echezona", "Dr. Obiageli Akamobi", "Dr. Onyekachukwu Ebenebe",
+  "Dr. Ngozika Ekwe", "Nnaemena Ugochukwu George", "Chibuzor Wilson Iteke", "Azubuike JohnPaul",
+  "Collins Okelue", "Ifeanyi Emesiani", "Mbanefo Obioma D.", "Okwuenu Ezebuilo", "Nnatuanya Felix Obinna",
+];
+
+const termsOfReference = [
+  "Plan, organise, and coordinate the annual Postgraduate Research Conference to maintain high academic standards.",
+  "Develop and review conference themes, sub-themes, and participation guidelines.",
+  "Oversee the call for papers, abstract review, and selection process.",
+  "Handle all logistical and administrative arrangements including venue, scheduling, and publicity.",
+  "Secure resources, partnerships, sponsorships, and technical support.",
+  "Produce a comprehensive post-conference report and support publication of proceedings.",
+  "Co-opt individuals into subcommittees for specialised expertise.",
 ];
 
 function ConferencePage() {
@@ -88,8 +117,23 @@ function ConferencePage() {
 
         <div className="mt-32 reveal-anim">
           <div className="max-w-3xl mb-12">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/50">Faculty Liaisons</p>
+            <h3 className="mt-4 text-4xl font-black text-primary tracking-tighter">Faculty Representatives</h3>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {facultyRepresentatives.map(([faculty, name]) => (
+              <div key={faculty} className="flex items-center justify-between border-b border-border/40 pb-4 group">
+                <span className="text-sm font-bold text-foreground/50 group-hover:text-primary transition-colors">{faculty}</span>
+                <span className="text-sm font-black text-primary">{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-32 reveal-anim">
+          <div className="max-w-3xl mb-12">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/50">Supporting Staff</p>
-            <h3 className="mt-4 text-4xl font-black text-primary tracking-tighter">Conference Members</h3>
+            <h3 className="mt-4 text-4xl font-black text-primary tracking-tighter">Committee Members</h3>
           </div>
           <ul className="grid gap-x-12 gap-y-4 text-sm font-bold text-foreground/60 md:grid-cols-3">
             {members.map((m) => (
@@ -99,6 +143,19 @@ function ConferencePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </Section>
+
+      <Section eyebrow="Terms of Reference" title="Our mandate." muted>
+        <div className="grid gap-8 md:grid-cols-2 reveal-anim">
+          {termsOfReference.map((text, i) => (
+            <div key={i} className="group glass-card p-10 rounded-[2.5rem] transition-all duration-500 hover:border-primary bg-white/40">
+              <div className="flex gap-6">
+                <span className="font-display text-4xl font-black text-primary/10 group-hover:text-primary transition-colors tracking-tighter shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <p className="text-foreground/70 font-medium leading-relaxed mt-2">{text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
     </>

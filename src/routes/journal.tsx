@@ -14,31 +14,37 @@ export const Route = createFileRoute("/journal")({
 });
 
 const aims = [
-  ["Promote high-quality postgraduate research", "Support clear, well-structured, relevant work that adds value to knowledge and responds to important questions."],
-  ["Encourage interdisciplinary thinking", "Modern problems are rarely confined to one discipline. We support work that connects ideas and methods across fields."],
-  ["Strengthen the research culture", "Nurture an academic environment where postgraduate scholars are encouraged to investigate, think critically, and engage."],
-  ["Support research that leads to development", "Emphasis on studies offering practical insights, policy direction, and innovations that improve lives."],
-  ["Showcase local & African perspectives", "Highlight research grounded in local realities while engaging international academic conversations."],
-  ["Encourage open and responsible dialogue", "Create room for honest, constructive, thoughtful academic discussion on matters that affect society."],
+  ["To promote high-quality postgraduate research", "The journal seeks to support research that is clear, well-structured, and relevant. We want to encourage postgraduate students and scholars to produce work that adds value to knowledge and responds to important questions in their fields."],
+  ["To encourage interdisciplinary thinking", "Modern problems are rarely limited to a single discipline. The journal therefore aims to support research that connects ideas and methods from different fields, allowing for deeper understanding and more practical solutions."],
+  ["To strengthen the research culture within COOU and beyond", "The journal aims to nurture a strong academic environment where postgraduate students and researchers feel encouraged to investigate issues, think critically, and engage with scholarly debates."],
+  ["To support research that can lead to development", "The journal places emphasis on studies that offer practical insights, policy direction, or innovative approaches that can improve lives, strengthen institutions, and support community development."],
+  ["To showcase local and African perspectives", "The journal aims to highlight research that draws from local realities, experiences, and knowledge systems, while still connecting with international academic conversations."],
+  ["To encourage open and responsible academic dialogue", "We aim to create room for honest, constructive, and thoughtful academic discussion on matters that affect society, institutions, and everyday life."],
 ];
 
 const scope = [
-  ["Social Sciences", "Governance, public administration, sociology, anthropology, political studies, gender, rural development, social change."],
-  ["Education & Learning Studies", "Teaching methods, school management, curriculum, adult learning, educational innovations."],
-  ["Management & Business", "Entrepreneurship, finance, HR, organisational behaviour, leadership, development management."],
-  ["Natural & Applied Sciences", "Environmental studies, agriculture, biological sciences, climate change, technology adoption."],
-  ["Health & Behavioural Sciences", "Public health, mental health, behavioural patterns, health education, community health."],
-  ["Arts & Humanities", "Culture, language, literature, communication, philosophy, religion, creative industries."],
-  ["Law, Policy & Governance", "Legal systems, policy formulation, justice administration, human rights, institutional governance."],
-  ["Environmental & Development", "Sustainability, waste management, energy, urbanisation, community development, environmental policy."],
-  ["Interdisciplinary & Cross-cutting", "Studies that blend disciplines or introduce innovative solutions to complex challenges."],
+  ["Social Sciences", "Governance, public administration, sociology, anthropology, political studies, gender issues, rural development, and social change."],
+  ["Education and Learning Studies", "Studies on teaching methods, school management, curriculum development, adult learning, and educational innovations."],
+  ["Management and Business", "Entrepreneurship, finance, human resource management, organisational behaviour, leadership, and development management."],
+  ["Natural and Applied Sciences", "Environmental studies, agriculture, biological sciences, climate change, technology adoption, and scientific innovations that support development."],
+  ["Health and Behavioural Sciences", "Public health, mental health, behavioural patterns, health education, and community health issues."],
+  ["Arts and Humanities", "Studies in culture, language, literature, communication, philosophy, religion, and creative industries."],
+  ["Law, Policy, and Governance Studies", "Legal systems, policy formulation, justice administration, human rights, and institutional governance."],
+  ["Environmental and Development Studies", "Sustainability, waste management, energy issues, urbanisation, community development, and environmental policy."],
+  ["Interdisciplinary and Cross-cutting Research", "Any study that blends more than one discipline, introduces new ideas, or provides innovative solutions to social, economic, cultural, or environmental challenges."],
 ];
 
 const sections = [
-  ["Original Research Articles", "Full research papers presenting new findings, fresh ideas, or original analysis — typically introduction, methods, results, discussion."],
-  ["Review Articles", "Careful examinations of existing literature: trends, gaps, and new directions."],
-  ["Conceptual & Theoretical Papers", "Explorations of theories, models and frameworks; new ways of thinking about issues in society."],
-  ["Policy Papers & Briefs", "Concise, evidence-based commentary aimed at decision-makers."],
+  ["Original Research Articles", "Full research papers that present new findings, fresh ideas, or original analysis. Usually follow a format: introduction, methods, results, and discussion."],
+  ["Review Articles", "Papers that carefully examine existing literature. They bring together what other researchers have said, point out trends, highlight gaps, and suggest new directions."],
+  ["Conceptual and Theoretical Papers", "Explore theories, models, and frameworks to help understand important concepts and offer new ways of thinking about issues."],
+  ["Policy Papers and Briefs", "Analyse policies or recommend improvements to government programmes, laws, or institutional practices. Short, clear, and focused on practical solutions."],
+  ["Case Studies", "Present real-life situations from communities or organisations to show how theories apply in practice."],
+  ["Methodological Papers", "Focus on research methods, explaining new methods, comparing popular ones, or discussing best practices in design and analysis."],
+  ["Field Reports", "Shorter pieces describing observations or lessons learnt from fieldwork or community engagements."],
+  ["Interdisciplinary Insights", "Short papers that combine ideas from two or more fields to encourage creative thinking."],
+  ["Book Reviews", "Reviews of newly published academic books, helping readers understand their main ideas and relevance."],
+  ["Graduate Research Spotlight", "Celebrating excellent postgraduate work, including outstanding thesis summaries or student-led projects."],
 ];
 
 export default function JournalPage() {

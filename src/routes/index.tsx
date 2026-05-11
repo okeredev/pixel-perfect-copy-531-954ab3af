@@ -19,8 +19,8 @@ function HomePage() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden pt-10 md:pt-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 py-20 md:grid-cols-12 md:py-32">
-          <div className="md:col-span-7 reveal-anim">
+        <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 py-20 lg:grid-cols-12 md:py-32">
+          <div className="lg:col-span-6 reveal-anim">
             <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.25em] text-primary backdrop-blur">
               <Sparkles size={14} className="text-primary animate-pulse" />
               Official COOU Graduate Journal
@@ -58,23 +58,38 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="md:col-span-5 reveal-anim" style={{ animationDelay: '0.2s' }}>
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-border/60 glass-card premium-shadow rotate-2">
+          <div className="lg:col-span-6 reveal-anim" style={{ animationDelay: '0.2s' }}>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-border/40 bg-white premium-shadow">
               <img
                 src={heroImage}
-                alt="Library reading hall"
-                width={1600}
-                height={1024}
+                alt="COOU Gate"
                 className="h-full w-full object-cover transition-transform duration-1000 hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent" />
-              <div className="absolute left-6 top-6 rounded-2xl glass-card px-6 py-4 text-xs shadow-2xl">
-                <div className="text-[9px] font-black uppercase tracking-[0.25em] text-primary/60">Call for Papers</div>
-                <div className="mt-1 font-display text-base font-black text-primary tracking-tight">Now open for Vol. 1</div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              
+              {/* Floating Cards */}
+              <div className="absolute -left-6 top-20 rounded-2xl bg-white/95 p-6 shadow-2xl shadow-black/5 backdrop-blur-xl border border-white/20 float-anim">
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <Sparkles size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-primary/40">New Submission</div>
+                    <div className="text-sm font-bold text-primary">Volume 01 · Issue 01</div>
+                  </div>
+                </div>
               </div>
-              <div className="absolute bottom-6 right-6 rounded-2xl glass-card px-6 py-4 text-xs shadow-2xl">
-                <div className="text-[9px] font-black uppercase tracking-[0.25em] text-primary/60">Peer Review</div>
-                <div className="mt-1 font-display text-base font-black text-primary tracking-tight">Double-blind system</div>
+
+              <div className="absolute -right-6 bottom-20 rounded-2xl bg-white/95 p-6 shadow-2xl shadow-black/5 backdrop-blur-xl border border-white/20 float-anim" style={{ animationDelay: '-2s' }}>
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <Users size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-primary/40">Registered Members</div>
+                    <div className="text-sm font-bold text-primary">500+ Researchers</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

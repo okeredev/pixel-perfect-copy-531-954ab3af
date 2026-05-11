@@ -19,6 +19,13 @@ function HomePage() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden pt-10 md:pt-20">
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[60%] rounded-full bg-primary/5 blur-[120px] animate-pulse-soft" />
+          <div className="absolute bottom-[20%] left-[-5%] w-[30%] h-[50%] rounded-full bg-gold/10 blur-[100px]" />
+          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-gradient-to-b from-white via-white/50 to-transparent opacity-50" />
+        </div>
+
         <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 py-20 lg:grid-cols-12 md:py-32">
           <div className="lg:col-span-6 reveal-anim">
             <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-[10px] font-black uppercase tracking-[0.25em] text-primary backdrop-blur">

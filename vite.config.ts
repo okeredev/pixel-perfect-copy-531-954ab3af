@@ -10,6 +10,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 // - api/index.ts is a Vercel Node serverless function that adapts Node req/res
 //   to a Web Request and forwards to the SSR fetch handler.
 // - vercel.json wires routing: /assets/* -> static, everything else -> api/index.
+// Triggering fresh Vercel build with environment variables
 export default defineConfig({
   server: {
     host: "::",

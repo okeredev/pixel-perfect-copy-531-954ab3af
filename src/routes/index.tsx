@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { ArrowRight, BookOpen, Users, ScrollText, Award, FileCheck, Globe2, Sparkles } from "lucide-react";
 import heroImage from "@/assets/coou-campus.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,10 +48,10 @@ function HomePage() {
             </p>
             <div className="mt-12 flex flex-wrap gap-4">
               <Link
-                to="/journal"
+                to="/archive"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-black uppercase tracking-widest text-primary-foreground shadow-2xl shadow-primary/30 transition-all hover:scale-[1.05] active:scale-95"
               >
-                Explore the Journal <ArrowRight size={18} />
+                View Published Articles <ArrowRight size={18} />
               </Link>
               <Link
                 to="/conference"
@@ -112,6 +115,9 @@ function HomePage() {
           <BigStat value="1" label="Inaugural conference" />
         </div>
       </section>
+
+      {/* RECENT ARTICLES */}
+      <RecentArticles />
 
       {/* TWIN PILLARS */}
       <section className="mx-auto max-w-7xl px-6 py-32 reveal-anim" style={{ animationDelay: '0.4s' }}>
@@ -186,6 +192,99 @@ function HomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+function RecentArticles() {
+  const [articles, setArticles] = useState<any[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const { data, error } = await supabase
+        .from("submissions")
+        .select("id, title, abstract, type, published_at")
+        .eq("status", "published")
+        .order("published_at", { ascending: false })
+        .limit(2);
+
+      if (error) {
+        toast.error("Failed to load recent articles");
+        setArticles([]);
+      } else {
+        const rows = data || [];
+        if (rows.length > 0) {
+          const ids = rows.map((r) => r.id);
+          const { data: authors } = await supabase
+            .from("submission_authors")
+            .select("submission_id, full_name")
+            .in("submission_id", ids)
+            .order("position");
+
+          const authorMap = new Map();
+          (authors ?? []).forEach((a) => {
+            if (!authorMap.has(a.submission_id)) authorMap.set(a.submission_id, []);
+            authorMap.get(a.submission_id).push(a);
+          });
+
+          rows.forEach((r) => {
+            r.authors = authorMap.get(r.id) || [];
+          });
+        }
+        setArticles(rows);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) return null;
+  if (!articles || articles.length === 0) return null;
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24 reveal-anim">
+      <div className="mb-12 flex items-end justify-between gap-6">
+        <div className="max-w-2xl">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/50">Latest Research</p>
+          <h2 className="mt-4 text-4xl font-black text-primary tracking-tighter">Recently published in the Journal.</h2>
+        </div>
+        <Link to="/archive" className="hidden md:inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary hover:gap-4 transition-all">
+          Browse Archive <ArrowRight size={16} />
+        </Link>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-2">
+        {articles.map((art) => (
+          <div key={art.id} className="group relative flex flex-col gap-6 rounded-[2.5rem] glass-card p-10 transition-all duration-500 hover:border-primary/40 premium-shadow">
+            <div>
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className="rounded-full bg-primary/5 border border-primary/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-primary">
+                  {art.type}
+                </span>
+                <span className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-widest">
+                  {new Date(art.published_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long' })}
+                </span>
+              </div>
+              <h3 className="text-2xl font-black text-primary leading-tight tracking-tight group-hover:text-primary/80 transition-colors">
+                {art.title}
+              </h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {art.authors?.map((a: any, i: number) => (
+                  <span key={i} className="text-[11px] font-bold text-foreground/60">
+                    {a.full_name}{i < (art.authors?.length || 0) - 1 ? "," : ""}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p className="text-sm font-medium leading-relaxed text-foreground/70 line-clamp-2 italic">
+              "{art.abstract}"
+            </p>
+            <Link to="/archive" className="mt-auto inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-primary group-hover:gap-5 transition-all">
+              <BookOpen size={14} /> View Article
+            </Link>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 

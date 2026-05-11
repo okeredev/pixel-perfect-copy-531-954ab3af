@@ -8,6 +8,7 @@ const ROLES: AppRole[] = ["admin", "editor", "reviewer", "author"];
 
 type UserRow = {
   id: string; full_name: string; email: string | null; affiliation: string | null;
+  country: string | null; phone: string | null; orcid: string | null; bio: string | null;
   created_at: string; roles: AppRole[];
 };
 
@@ -18,7 +19,12 @@ export function UsersTab({ isAdmin, onDetail }: { isAdmin: boolean; onDetail: (u
   const [busyId, setBusyId] = useState<string | null>(null);
 
   async function load() {
-    const { data: profiles, error } = await supabase.from("profiles").select("id, full_name, email, affiliation, created_at").order("created_at", { ascending: false }).limit(500);
+    const { data: profiles, error } = await supabase
+      .from("profiles")
+      .select("id, full_name, email, affiliation, created_at, country, phone, orcid, bio")
+      .order("created_at", { ascending: false })
+      .limit(500);
+      
     if (error) { toast.error(error.message); setUsers([]); return; }
     const ids = (profiles ?? []).map((p) => p.id);
     let rolesMap = new Map<string, AppRole[]>();
@@ -27,7 +33,18 @@ export function UsersTab({ isAdmin, onDetail }: { isAdmin: boolean; onDetail: (u
       if (roleError) toast.error("Failed to load roles: " + roleError.message);
       (rs ?? []).forEach((r) => { const arr = rolesMap.get(r.user_id) ?? []; arr.push(r.role as AppRole); rolesMap.set(r.user_id, arr); });
     }
-    setUsers((profiles ?? []).map((p) => ({ id: p.id, full_name: p.full_name ?? "", email: p.email, affiliation: p.affiliation, created_at: p.created_at, roles: rolesMap.get(p.id) ?? [] })));
+    setUsers((profiles ?? []).map((p) => ({ 
+      id: p.id, 
+      full_name: p.full_name ?? "", 
+      email: p.email, 
+      affiliation: p.affiliation, 
+      country: p.country,
+      phone: p.phone,
+      orcid: p.orcid,
+      bio: p.bio,
+      created_at: p.created_at, 
+      roles: rolesMap.get(p.id) ?? [] 
+    })));
   }
 
   useEffect(() => { load(); }, []);
